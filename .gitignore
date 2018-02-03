@@ -1,0 +1,11 @@
+# Mac General
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IntelliJ IDE configuration
+.idea/
+
+# Log files
+*.log

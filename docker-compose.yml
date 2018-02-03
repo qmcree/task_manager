@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    build: ./db/
+    volumes:
+      - ./db/data/:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      # Define the credentials to use for the database initialized at first container run.
+      # These should NOT be hard-coded in a production environment and are only defined here for a simple setup.
+      - POSTGRES_DB=task_manager
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=notsecret
+  api:
+    build: ./api/
+    volumes:
+      - ./api/:/usr/src/app/
+    ports:
+      - "8080:8080"
+    environment:
+      # These should NOT be hard-coded in a production environment and are only defined here for a simple setup.
+      - APP_DEBUG=True
+      - APP_KEY=zzzo1o%di^nc1m(-9bo*-rpw!6g7-^98w**jy_@02b6qmf@9%x
+      - DB_NAME=task_manager
+      - DB_USER=app
+      - DB_PASSWORD=notsecret
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+  ui:
+    build: ./ui/
+    volumes:
+      - ./ui/:/usr/src/app/
+    ports:
+      - "80:80"
+    depends_on:
+      - api
