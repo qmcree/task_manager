@@ -4,25 +4,25 @@ import axios from "axios/index";
 
 class Task extends Component {
     state = {
-        isNotesExpanded: false,
-        isNotesLoaded: false,
+        areNotesVisible: false,
+        areNotesLoaded: false,
         notes: [],
     };
     toggleTaskVisibility = (event) => {
         event.preventDefault();
 
         // Load the notes if they aren't already.
-        if (!this.state.isNotesLoaded) {
+        if (!this.state.areNotesLoaded) {
             Task.getTaskDetails(this.props.task.id).then((response) => {
                 this.setState({
                     notes: response.data.notes,
-                    isNotesLoaded: true,
+                    areNotesLoaded: true,
                 });
             });
         }
 
         this.setState({
-            isNotesExpanded: !this.state.isNotesExpanded
+            areNotesVisible: !this.state.areNotesVisible
         });
     };
 
@@ -32,7 +32,7 @@ class Task extends Component {
 
     render() {
         const priorityClassName = 'priority-' + this.props.task.priority_level;
-        const toggleText = (this.state.isNotesExpanded ? 'hide' : 'show') + ' notes';
+        const toggleText = (this.state.areNotesVisible ? 'hide' : 'show') + ' notes';
         const notes = this.state.notes.map(function (note) {
             return <TaskNote note={note}/>
         });
@@ -46,7 +46,7 @@ class Task extends Component {
                     <p className="details">{this.props.task.details}</p>
                     <p><a href="#" className="task-notes-toggle" onClick={this.toggleTaskVisibility}>{toggleText}</a>
                     </p>
-                    {this.state.isNotesExpanded &&
+                    {this.state.areNotesVisible &&
                     <div className="note-list">
                         {notes}
                     </div>
