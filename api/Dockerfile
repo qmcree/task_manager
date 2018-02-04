@@ -1,4 +1,3 @@
-# qmcree/task_manager_api
 # Base Dockerfile - https://github.com/docker-library/python/blob/a1aa406bfd8c7b129e6e0ee0ba972b863624ac0d/3.6/stretch/Dockerfile
 FROM python:3.6.4-stretch
 

@@ -5,6 +5,7 @@ from .models import Task, User
 
 
 def list_users(request: HttpRequest):
+    # TODO: include number of tasks.
     users = User.objects.all()
     data = list(
         dict(
@@ -26,6 +27,7 @@ def list_users(request: HttpRequest):
 
 
 def list_users_tasks(request: HttpRequest, user_id: int):
+    # TODO: sort by uncompleted, priority, created_at (oldest first)
     tasks = Task.objects.filter(assignee_user_id=user_id)
     data = list(
         dict(

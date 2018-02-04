@@ -29,10 +29,12 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'task_manager.apps.TaskManagerConfig',
     'django.contrib.contenttypes',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -106,3 +108,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Allow all hostnames to make cross-origin requests to this API. Although this isn't safe for production, it's OK here.
+CORS_ORIGIN_ALLOW_ALL = True
