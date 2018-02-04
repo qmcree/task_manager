@@ -36,5 +36,8 @@ services:
       - ./ui/:/usr/src/app/
     ports:
       - "80:80"
+    environment:
+      # The NPM start script reads from this when determining which port to listen on.
+      - PORT=80
     depends_on:
       - api

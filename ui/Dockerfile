@@ -1,6 +1,5 @@
-# qmcree/task_manager_ui
-# Base Dockerfile - https://github.com/nodejs/docker-node/blob/df8782dfddf8c70663f0a7d19942120b1d6977a5/9/Dockerfile
-FROM node:9.4
+# Base Dockerfile - https://github.com/nodejs/docker-node/blob/994f8286cb0efc92578902d5fd11182f63a59869/8/Dockerfile
+FROM node:8.9.4
 
 # Create the source code directory.
 ARG SOURCE_DIR=/usr/src/app/
@@ -17,5 +16,5 @@ RUN npm install --global yarn
 RUN yarn install
 
 # Run the NPM script defined in the package.json to serve the application over port 80.
-CMD yarn run start
+CMD yarn start
 EXPOSE 80
