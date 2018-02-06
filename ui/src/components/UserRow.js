@@ -43,7 +43,9 @@ class UserRow extends Component {
                 <img src="/avatar.png" className="avatar" alt="User avatar"/>
                 <div className="details">
                     <h3>{this.props.user.first_name} {this.props.user.last_name}</h3>
-                    <p className="address">{this.props.user.address.street} {this.props.user.address.city}, {this.props.user.address.state} {this.props.user.address.postal_code}</p>
+                    <p className="username-email">{this.props.user.username} (<a
+                        href={'mailto:' + this.props.user.email}>email</a>)</p>
+                    <p className="address">{this.props.user.address.street}, {this.props.user.address.city}, {this.props.user.address.state} {this.props.user.address.postal_code}</p>
                     <p>
                         <button className="task-toggle" onClick={this.toggleTaskVisibility}>{toggleText}</button>
                     </p>
