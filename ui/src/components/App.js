@@ -4,9 +4,13 @@ import '../styles/App.css';
 import UserList from "./UserList";
 
 class App extends Component {
-    state = {
-        users: []
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            users: [],
+        };
+    }
 
     static getUsers() {
         return axios.get('http://localhost:8080/users/');

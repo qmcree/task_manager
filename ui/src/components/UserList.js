@@ -1,20 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import UserRow from "./UserRow";
 
-class UserList extends Component {
-    props = {
-        users: []
-    };
+function UserList(props) {
+    const userRows = props.users.map(function (user, index) {
+        return <UserRow key={index} user={user}/>
+    });
 
-    render() {
-        const userRows = this.props.users.map(function (user) {
-            return <UserRow user={user}/>
-        });
-
-        return (
-            <div className="user-list">{userRows}</div>
-        )
-    }
+    return (
+        <div className="user-list">{userRows}</div>
+    )
 }
 
 export default UserList;

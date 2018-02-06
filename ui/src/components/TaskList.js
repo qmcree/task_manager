@@ -1,36 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Task from "./Task";
 
-class TaskList extends Component {
-    props = {
-        tasks: [],
-    };
+function TaskList(props) {
+    const acceptedTasks = [];
+    const unacceptedTasks = [];
 
-    render() {
-        const acceptedTasks = [];
-        const unacceptedTasks = [];
+    props.tasks.forEach(function (task, index) {
+        if (task.is_accepted) {
+            acceptedTasks.push(<Task key={index} task={task}/>);
+        } else {
+            unacceptedTasks.push(<Task key={index} task={task}/>);
+        }
+    });
 
-        this.props.tasks.forEach(function (task) {
-            if (task.is_accepted) {
-                acceptedTasks.push(<Task task={task}/>);
-            } else {
-                unacceptedTasks.push(<Task task={task}/>);
-            }
-        });
-
-        return (
-            <div className="task-list">
-                <div className="tasks-accepted">
-                    <h6>Accepted</h6>
-                    {acceptedTasks}
-                </div>
-                <div className="tasks-unaccepted">
-                    <h6>Unaccepted</h6>
-                    {unacceptedTasks}
-                </div>
+    return (
+        <div className="task-list">
+            <div className="tasks-accepted">
+                <h6>Accepted</h6>
+                {acceptedTasks}
             </div>
-        );
-    }
+            <div className="tasks-unaccepted">
+                <h6>Unaccepted</h6>
+                {unacceptedTasks}
+            </div>
+        </div>
+    );
 }
 
 export default TaskList;
