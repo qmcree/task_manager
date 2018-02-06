@@ -5,8 +5,8 @@ from .models import Task, User
 
 
 def list_users(request: HttpRequest):
-    # TODO: include number of tasks.
-    users = User.objects.all()
+    # TODO: include number of tasks assigned to each user.
+    users = User.objects.order_by('first_name').all()
     data = list(
         dict(
             id=user.id,
@@ -27,8 +27,7 @@ def list_users(request: HttpRequest):
 
 
 def list_users_tasks(request: HttpRequest, user_id: int):
-    # TODO: sort by uncompleted, priority, created_at (oldest first)
-    tasks = Task.objects.filter(assignee_user_id=user_id)
+    tasks = Task.objects.filter(assignee_user_id=user_id).order_by('is_completed', 'priority', 'created_at')
     data = list(
         dict(
             id=task.id,
@@ -52,7 +51,12 @@ def get_task_details(request: HttpRequest, task_id: int):
 
     notes_data = list(
         dict(
-            user_id=note.user_id,
+            # TODO: remove and update UI to retrieve values from state store.
+            user=dict(
+                id=note.user.id,
+                first_name=note.user.first_name,
+                last_name=note.user.last_name,
+            ),
             note=note.note
         ) for note in notes
     )
